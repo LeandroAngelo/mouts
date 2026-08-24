@@ -23,9 +23,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             return await _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
         }
 
-        public Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var product = await GetByIdAsync(id, cancellationToken);
+            if (product == null)
+                return false;
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
         }
 
         public Task<Product> UpdateProduct(Product product, CancellationToken cancellationToken = default)
