@@ -28,7 +28,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponseWithData<CreateProductResponse>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
         {
             var validator = new CreateProductRequestValidator();
             var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -51,7 +51,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
         [ProducesResponseType(typeof(ApiResponseWithData<GetProductResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUser([FromRoute] Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetProduct([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var request = new GetProductRequest { Id = id };
             var validator = new GetProductRequestValidator();
